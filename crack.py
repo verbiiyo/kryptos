@@ -82,7 +82,7 @@ def plot_characters_in_cirlce(text: str, clockwise: bool = True):
     # Annotate each node with the corresponding character
     for i, (x, y) in pos.items():
         char = G.nodes[i]['label']
-        ax.text(x, y, char, fontsize=12, ha='center', va='center')
+        ax.text(x, y, char, fontsize=8, ha='center', va='center')
 
     # Plot the unit circle
     circle = plt.Circle((0, 0), 1, color='lightgray', fill=False)
