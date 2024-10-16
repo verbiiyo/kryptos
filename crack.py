@@ -1,9 +1,15 @@
 
+k4_unsolved = """
+                           OBKR
+UOXOGHULBSOLIFBBWFLRVQQPRNGKSSO
+TWTQSJQSSEKZZWATJKLUDIAWINFBNYP
+VTTMZFPKWGDKZXTJCDIGKUHUAUEKCAR
+"""  # maybe the `?` pre-pends the key?
 
-k4 = "?OBKRUOXOGHULBSOLIFBBWEASTNORTHEASTOTWTQSJQSSEKZZWATJKLUDIAWINFBBERLINMZFPKWGDKZXTJCDIGKUHUAUEKCAR"
+k4_partial = "?OBKRUOXOGHULBSOLIFBBWEASTNORTHEASTOTWTQSJQSSEKZZWATJKLUDIAWINFBBERLINMZFPKWGDKZXTJCDIGKUHUAUEKCAR"
 
 # same text but laid out like the video https://www.youtube.com/watch?v=jVpsLMCIB0Y
-k4_layout = """
+k4_partial_layout = """
                           ?OBKR
 UOXOGHULBSOLIFBBWEASTNORTHEASTO
 TWTQSJQSSEKZZWATJKLUDIAWINFBBER
@@ -17,7 +23,7 @@ TWTQSJQSSEKZZWATJKLUDIAWINFBBER
 LINCLOCKWGDKZXTJCDIGKUHUAUEKCAR
 """  # MZFPK gets mapped to CLOCK (hint from Jim Sanborn)
 
-print(k4_layout)
+print(k4_partial_layout)
 
 # im thinking maybe we replace 
 # EAST with KITA
@@ -26,3 +32,5 @@ print(k4_layout)
 # CLOCK to (TOKEI)?
 
 # basically, we can define the cipher key with the alignemnt
+
+# draw a circle graph using networkx. let's have the characters
