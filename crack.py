@@ -1,3 +1,6 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
 
 k4_unsolved = """
                            OBKR
@@ -48,8 +51,39 @@ def plot_characters_in_cirlce(text: str, clockwise: bool = True):
     # if clockwise is False, then the characters are plotted in the reverse
     # direction.
 
-    # TODO:
-    pass
+    n = len(text)
+    
+    # Angle between characters in degrees
+    angle_step = 360 / n
+    
+    # If counterclockwise, reverse the angle direction
+    if not clockwise:
+        angle_step = -angle_step
+    
+    # Create figure and axis
+    fig, ax = plt.subplots(figsize=(6, 6))
+    ax.set_aspect('equal')
+
+    # Plot the unit circle
+    circle = plt.Circle((0, 0), 1, color='lightgray', fill=False)
+    ax.add_artist(circle)
+    
+    # Plot each character at the correct position
+    for i, char in enumerate(text):
+        angle = np.radians(i * angle_step)  # Convert angle to radians
+        x = np.sin(angle)
+        y = np.cos(angle)
+        
+        # Place character on the plot
+        ax.text(x, y, char, fontsize=12, ha='center', va='center')
+    
+    # Set limits and remove axes
+    ax.set_xlim(-1.5, 1.5)
+    ax.set_ylim(-1.5, 1.5)
+    ax.axis('off')
+    
+    plt.show()
+    plt.savefig("circle.png")
 
 
 k4_no_spaces = k4_unsolved.replace(" ", "").replace("\n", "")
