@@ -50,38 +50,49 @@ def plot_characters_in_cirlce(text: str, clockwise: bool = True):
 
     # if clockwise is False, then the characters are plotted in the reverse
     # direction.
-
     n = len(text)
-    
-    # Angle between characters in degrees
-    angle_step = 360 / n
-    
-    # If counterclockwise, reverse the angle direction
+
+    # Create a graph
+    G = nx.Graph()
+
+    # Add nodes for each character in the text
+    for i, char in enumerate(text):
+        G.add_node(i, label=char)
+
+    # Calculate angles between characters (in radians)
+    angle_step = 2 * np.pi / n
     if not clockwise:
         angle_step = -angle_step
-    
-    # Create figure and axis
+
+    # Calculate positions for each character around the circle
+    pos = {}
+    for i in range(n):
+        angle = i * angle_step
+        x = np.sin(angle)
+        y = np.cos(angle)
+        pos[i] = (x, y)
+
+    # Draw the graph
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.set_aspect('equal')
+
+    # Draw the nodes (characters)
+    nx.draw(G, pos, ax=ax, with_labels=False, node_size=0)  # No actual node circles
+
+    # Annotate each node with the corresponding character
+    for i, (x, y) in pos.items():
+        char = G.nodes[i]['label']
+        ax.text(x, y, char, fontsize=12, ha='center', va='center')
 
     # Plot the unit circle
     circle = plt.Circle((0, 0), 1, color='lightgray', fill=False)
     ax.add_artist(circle)
-    
-    # Plot each character at the correct position
-    for i, char in enumerate(text):
-        angle = np.radians(i * angle_step)  # Convert angle to radians
-        x = np.sin(angle)
-        y = np.cos(angle)
-        
-        # Place character on the plot
-        ax.text(x, y, char, fontsize=12, ha='center', va='center')
-    
+
     # Set limits and remove axes
     ax.set_xlim(-1.5, 1.5)
     ax.set_ylim(-1.5, 1.5)
     ax.axis('off')
-    
+
     plt.show()
     plt.savefig("circle.png")
 
