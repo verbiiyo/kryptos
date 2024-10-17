@@ -20,7 +20,7 @@ def wrap_decypher(text: str, wrap_key: int):
         out_str += cypher_text[char_index % len(cypher_text)]
 
     # re-organize out_str to match K3's newline format
-    out_str = "\n".join([out_str[i:i+31] for i in range(0, len(out_str), 31)])
+    # out_str = "\n".join([out_str[i:i+31] for i in range(0, len(out_str), 31)])
 
     return out_str
 
