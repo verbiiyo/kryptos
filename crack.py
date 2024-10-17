@@ -102,7 +102,8 @@ print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
 print()
 
 print("K4 Decrypted...???:")
-print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
+# print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
+# print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
 # print(multi_wrap_decipher(K4, [2, 4, 11, 2, 1, 1, 3]))  # berlin with degrees as hours?
 # print(vigenere_decipher(K4, "KRYPTOS", "GWMP"))
 # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
