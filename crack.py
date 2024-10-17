@@ -113,19 +113,57 @@ def clock_forward(text: str, depth: int = 1):
             categories[category] += char
         
         # join categories into strings then one big string
-        text = "".join(["".join(category) for category in categories])
+        text = reversed("".join(["".join(category) for category in categories]))
 
     return text
 
 
-for d in range(1024):
+# for d in range(1024):
 
-    new_text = clock_forward(k4_no_spaces, depth=d)
-    # check if it has "CLOCK", "EAST", "NORTH", or "BERLIN" in the string, if so print it
+#     new_text = clock_forward(k4_no_spaces, depth=d)
+#     # check if it has "CLOCK", "EAST", "NORTH", or "BERLIN" in the string, if so print it
 
-    words = ["CLOCK", "EAST", "NORTH", "BERLIN"]
+#     words = ["CLOCK", "EAST", "NORTH", "BERLIN"]
 
-    if any(word in new_text for word in words):
-        print(f"Depth: {d}")
-        print(new_text)
-        print("\n\n")
+#     if any(word in new_text for word in words):
+#         print(f"Depth: {d}")
+#         print(new_text)
+#         print("\n\n")
+
+
+def get_char_frequencies(text: str, filter: bool = True):
+    text = text.upper()
+
+    if filter:
+        # only allow a-z characters
+        text = "".join([char for char in text if char.isalpha()])
+
+    # count unique characters
+    char_counts = {}
+    for char in text:
+        if char not in char_counts:
+            char_counts[char] = 0
+        char_counts[char] += 1
+
+    # sort characters by frequency
+    sorted_chars = sorted(char_counts.keys(), key=lambda char: char_counts[char], reverse=True)
+    return char_counts, sorted_chars
+
+
+def plot_char_frequencies(text: str, fig_name: str="char_frequencies.png"):
+    # plot the frequency of each character in the text
+    
+    char_counts, sorted_chars = get_char_frequencies(text)
+
+    # plot the frequencies
+    fig, ax = plt.subplots()
+
+    ax.bar(range(len(sorted_chars)), [char_counts[char] for char in sorted_chars])
+    ax.set_xticks(range(len(sorted_chars)))
+    ax.set_xticklabels(sorted_chars)
+    ax.set_xlabel('Character')
+    ax.set_ylabel('Frequency')
+
+    plt.savefig(fig_name)
+
+plot_char_frequencies(k4_no_spaces)
