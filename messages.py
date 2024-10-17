@@ -1,4 +1,4 @@
-KRYPTOS_FULL_ENCRYPTED = """
+KRYPTOS = """
 EMUFPHZLRFAXYUSDJKZLDKRNSHGNFIVJ
 YQTQUXQBQVYUVLLTREVJYQTMKYRDMFD
 VFPJUDEEHZWETZYVGWHKKQETGFQJNCE
@@ -62,6 +62,15 @@ AECTDDHILCEIHSITEGOEAOSDDRYDLORIT
 RKLMLEHAGTDHARDPNEOHMGFMFEUHE
 ECDMRIPFEIMEHNLSSTTRTVDOHW?
 """
+
+# break K3 into a 14x24 grid
+def break_k3_into_14x24(text: str):
+    text = text.replace("\n", "")
+    return "\n".join([text[i:i+24] for i in range(0, len(text), 24)])[:-1]
+
+# this is how they originally wrote down the cipher text the text with the 14x24 grid
+# (excludes the ?)
+K3_14_24 = break_k3_into_14x24(K3)
 
 K4 = """
 OBKR

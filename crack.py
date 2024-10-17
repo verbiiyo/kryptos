@@ -5,7 +5,7 @@
 
 # print(clock_forward(k4_no_spaces, depth=1))
 
-from messages import KRYPTOS_FULL_ENCRYPTED, K1, K2, K3, K4
+from messages import KRYPTOS, K1, K2, K3, K4
 
 
 # apparently K3 can be decrypted with 192 characters
@@ -31,4 +31,4 @@ print(wrap_decypher(K3, 192))
 
 print("-----")
 
-print(wrap_decypher(K4, 278))
+print(wrap_decypher(KRYPTOS, 192))
