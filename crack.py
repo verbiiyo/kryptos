@@ -111,10 +111,15 @@ print("K4 Decrypted...???:")
 # BRO... doing this results in a matrix-like output that has some very interesting patterns
 # like the boundary of repeating "O"s on the end and bottom of the matrix
 # and the repeating as you go further in the i dimension.
-for i in range(1, 100):
+for i in range(1, 120):
     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
     # if "EAST" in txt:
         # print(txt)
 
-    txt = multi_wrap_decipher(K4, list(range(1, i)))
+    txt = multi_wrap_decipher(K4, list(reversed(range(1, i))))
     print(txt)
+
+    if "EAST" in txt:
+        print("FOUND!")
+        exit()
+
