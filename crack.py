@@ -25,7 +25,7 @@ def wrap_decypher(text: str, wrap_key: int):
     return out_str
 
 
-def vigenere_decipher(cipher_text: str, key1: str, key2: str):
+def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
     # first key is used to construct the Vigenère table
     # Vigenère table is where you take key1 and pull it all to the beginning
     # of the standard 26-letter alphabet, excluding the '?' character.
@@ -38,7 +38,7 @@ def vigenere_decipher(cipher_text: str, key1: str, key2: str):
     # construct the Vigenère table (exclude '?')
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     table = ""
-    for char in key1:
+    for char in alphabet_key:
         if char not in table:
             table += char
             alphabet = alphabet.replace(char, "")
@@ -60,7 +60,7 @@ def vigenere_decipher(cipher_text: str, key1: str, key2: str):
             cipher_index = table.index(cipher_char)
 
             # get the corresponding key2 character (skip over '?' in key2)
-            key2_char = key2[key2_index % len(key2)]
+            key2_char = main_key[key2_index % len(main_key)]
             key2_index += 1
 
             # get the index of the key2 character in the table
