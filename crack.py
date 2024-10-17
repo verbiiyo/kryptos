@@ -11,12 +11,12 @@ from messages import KRYPTOS_FULL_ENCRYPTED, K1, K2, K3, K4
 # apparently K3 can be decrypted with 192 characters
 
 # let's gather the 192nd character from K3 for the full sequence
-def decrypt_k3():
-    cypher_text = K3.replace(" ", "").replace("\n", "")
+def wrap_decypher(text: str, wrap_key: int):
+    cypher_text = text.replace(" ", "").replace("\n", "")
 
     out_str = ""
     for i in range(len(cypher_text)):
-        char_index = 192 * (i + 1)
+        char_index = wrap_key * (i + 1)
         out_str += cypher_text[char_index % len(cypher_text)]
 
     # re-organize out_str to match K3's newline format
@@ -24,5 +24,11 @@ def decrypt_k3():
 
     return out_str
 
-print(K3)
-print(decrypt_k3())
+
+# we can decrypt K3 with wrap decypher using 192 as the key
+print("K3 decrypted:")
+print(wrap_decypher(K3, 192))
+
+print("-----")
+
+print(wrap_decypher(K4, 278))
