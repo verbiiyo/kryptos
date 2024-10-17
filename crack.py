@@ -98,4 +98,15 @@ def plot_characters_in_cirlce(text: str, clockwise: bool = True):
 
 
 k4_no_spaces = k4_unsolved.replace(" ", "").replace("\n", "")
-plot_characters_in_cirlce(k4_no_spaces, clockwise=True)
+# k4_clock_layout_no_spaces = k4_clock_layout.replace(" ", "").replace("\n", "")
+# plot_characters_in_cirlce(k4_no_spaces, clockwise=True)
+
+
+categories = [list() for _ in range(12)]
+
+for i, char in enumerate(k4_no_spaces):
+    category = i % 12
+    categories[category] += char
+    print(category, char)
+
+print(categories)
