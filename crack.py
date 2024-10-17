@@ -113,6 +113,17 @@ print("K4 Decrypted...???:")
 # print(vigenere_decipher(K4, "KRYPTOS", "BERLINUHR"))  # clock name
 # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
 
+# print(multi_wrap_decipher(K4, [8, 31]))
+print(multi_wrap_decipher(K4, [31, 8]))
+
+# japanese stuff
+# print(vigenere_decipher(K4, "KRYPTOS", "TOZAI"))
+# print(vigenere_decipher(K4, "KRYPTOS", "KITA"))
+# print(vigenere_decipher(K4, "KRYPTOS", "HIGASHI"))
+# print(vigenere_decipher(K4, "KRYPTOS", "TOKYO" ))
+
+# print(wrap_decypher(K4, -336))  # berlin square counts
+
 
 # for i in reversed([1, 4, 4, 11, 4]):
 # for i in reversed([4, 4, 4, 4, 4, 4]):
@@ -126,7 +137,9 @@ print("K4 Decrypted...???:")
 #     # if "EAST" in txt:
 #         # print(txt)
 
-#     txt = multi_wrap_decipher(K4, list(reversed(range(1, i))))
+#     nums = list(range(1, i))
+
+#     txt = multi_wrap_decipher(K4, [x ** 2 for x in nums])
 #     print(txt)
 
 #     if "EAST" in txt:
