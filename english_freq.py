@@ -1,4 +1,4 @@
-from crack import plot_char_frequencies, k4_no_spaces
+from coded import plot_char_frequencies, k4_no_spaces
 
 
 def get_char_frequencies(text: str, filter: bool = True):
