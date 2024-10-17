@@ -26,17 +26,16 @@ def wrap_decypher(text: str, wrap_key: int):
 
 
 def vigenere_decipher(cipher_text: str, key1: str, key2: str):
-    # first key is used to construct the vigenere table
-    # vigenere table is where you take the key1 and pull it all to the beginning
+    # first key is used to construct the Vigenère table
+    # Vigenère table is where you take key1 and pull it all to the beginning
     # of the standard 26 letter alphabet.
-
-    # then, key2 can decipher the text using the vigenere table
+    
+    # then, key2 can decipher the text using the Vigenère table
     # by finding the row of the key2 character and the column of the text character
 
     cipher_text = cipher_text.replace("\n", "")
 
-    # let's begin
-    # first, construct the vigenere table
+    # construct the Vigenère table
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ?"
     table = ""
     for char in key1:
@@ -44,19 +43,33 @@ def vigenere_decipher(cipher_text: str, key1: str, key2: str):
         alphabet = alphabet.replace(char, "")
     table += alphabet
 
-    # encode the cipher text as alphabet indices in a list
-    cipher_indices = [table.index(char) for char in cipher_text]
-
-    # encode the key2 as alphabet indices in a list
-    key2_indices = [table.index(char) for char in key2]
-
-    # make key2_indices the same length as the cipher text by repeating it
-    key2_indices = key2_indices * (len(cipher_text) // len(key2_indices)) + key2_indices[:len(cipher_text) % len(key2_indices)]
-
-    # now, decipher the text by subtracting the key2 indices from the cipher text indices
+    # prepare to hold deciphered output
     out_str = ""
-    for i in range(len(cipher_text)):
-        out_str += table[(cipher_indices[i] - key2_indices[i]) % 27]
+
+    # track positions in the key2 string, since it needs to ignore '?'
+    key2_index = 0
+
+    # loop through each character of the cipher text
+    for i, cipher_char in enumerate(cipher_text):
+        if cipher_char == "?":
+            # leave question marks unchanged
+            out_str += "?"
+        else:
+            # get the index of the cipher character in the table
+            cipher_index = table.index(cipher_char)
+
+            # get the corresponding key2 character (ignore '?' in the key2 loop)
+            key2_char = key2[key2_index % len(key2)]
+            key2_index += 1
+
+            # get the index of the key2 character in the table
+            key2_index_in_table = table.index(key2_char)
+
+            # decipher by subtracting the key2 index from the cipher text index (mod table length)
+            decipher_index = (cipher_index - key2_index_in_table) % len(table)
+
+            # append the deciphered character to the output
+            out_str += table[decipher_index]
     
     return out_str
 
