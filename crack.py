@@ -75,6 +75,13 @@ def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
     return out_str
 
 
+def multi_wrap_decipher(text: str, wraps: list):
+    # wrap the text multiple times
+    for wrap in wraps:
+        text = wrap_decypher(text, wrap)
+    return text
+
+
 print(f"K1 has {len(K1.replace('\n', ''))} characters")
 print(f"K2 has {len(K2.replace('\n', ''))} characters")
 print(f"K3 has {len(K3.replace('\n', ''))} characters")
@@ -95,7 +102,15 @@ print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
 print()
 
 print("K4 Decrypted...???:")
-# print(vigenere_decipher(K4, "KRYPTOS", ""))
-# print(wrap_decypher(K4, 96))
-for i in range(1, 100):
-    print(wrap_decypher(K4, i))
+print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
+# print(multi_wrap_decipher(K4, [2, 4, 11, 2, 1, 1, 3]))  # berlin with degrees as hours?
+# print(vigenere_decipher(K4, "KRYPTOS", "GWMP"))
+# print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
+
+# BRO... doing this results in a matrix-like output that has some very interesting patterns
+# like the boundary of repeating "O"s on the end and bottom of the matrix
+# and the repeating as you go further in the i dimension.
+# for i in range(1, 300):
+#     txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+#     if "EAST" in txt:
+#         print(txt)
