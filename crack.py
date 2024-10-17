@@ -98,9 +98,5 @@ print("K3 Decrypted:")
 print(wrap_decypher(K3, 192))
 print()
 
-# print("-----")
-
-# print(K4)
-# print(len(K4.replace("\n", "")))
-
-# print(wrap_decypher(K1, 192))
+print("K4 Decrypted...???:")
+print("unknown")
