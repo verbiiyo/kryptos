@@ -110,7 +110,10 @@ print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
 # BRO... doing this results in a matrix-like output that has some very interesting patterns
 # like the boundary of repeating "O"s on the end and bottom of the matrix
 # and the repeating as you go further in the i dimension.
-# for i in range(1, 300):
-#     txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
-#     if "EAST" in txt:
-#         print(txt)
+for i in range(1, 100):
+    # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+    # if "EAST" in txt:
+        # print(txt)
+
+    txt = multi_wrap_decipher(K4, list(range(1, i)))
+    print(txt)
