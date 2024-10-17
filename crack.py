@@ -28,25 +28,26 @@ def wrap_decypher(text: str, wrap_key: int):
 def vigenere_decipher(cipher_text: str, key1: str, key2: str):
     # first key is used to construct the Vigenère table
     # Vigenère table is where you take key1 and pull it all to the beginning
-    # of the standard 26 letter alphabet.
-    
-    # then, key2 can decipher the text using the Vigenère table
-    # by finding the row of the key2 character and the column of the text character
+    # of the standard 26-letter alphabet, excluding the '?' character.
+
+    # Interestingly enough, when you include the `?` character in the alphabet, it only
+    # partially decrypts the text. So they deliberately left ? as a special ommitted character.
 
     cipher_text = cipher_text.replace("\n", "")
 
-    # construct the Vigenère table
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ?"
+    # construct the Vigenère table (exclude '?')
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     table = ""
     for char in key1:
-        table += char
-        alphabet = alphabet.replace(char, "")
+        if char not in table:
+            table += char
+            alphabet = alphabet.replace(char, "")
     table += alphabet
 
     # prepare to hold deciphered output
     out_str = ""
 
-    # track positions in the key2 string, since it needs to ignore '?'
+    # track positions in the key2 string, since it needs to ignore '?' in cipher text
     key2_index = 0
 
     # loop through each character of the cipher text
@@ -58,7 +59,7 @@ def vigenere_decipher(cipher_text: str, key1: str, key2: str):
             # get the index of the cipher character in the table
             cipher_index = table.index(cipher_char)
 
-            # get the corresponding key2 character (ignore '?' in the key2 loop)
+            # get the corresponding key2 character (skip over '?' in key2)
             key2_char = key2[key2_index % len(key2)]
             key2_index += 1
 
@@ -76,6 +77,7 @@ def vigenere_decipher(cipher_text: str, key1: str, key2: str):
 
 
 
+
 print(f"K1 has {len(K1.replace('\n', ''))} characters")
 print(f"K2 has {len(K2.replace('\n', ''))} characters")
 print(f"K3 has {len(K3.replace('\n', ''))} characters")
@@ -84,14 +86,17 @@ print()
 
 print("K1 Decrypted:")
 print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST"))
+print()
 
 print("K2 Decrypted:")
 print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
+print()
 
 
 # we can decrypt K3 with wrap decypher using 192 as the key
 print("K3 Decrypted:")
 print(wrap_decypher(K3, 192))
+print()
 
 # print("-----")
 
