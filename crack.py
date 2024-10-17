@@ -75,9 +75,6 @@ def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
     return out_str
 
 
-
-
-
 print(f"K1 has {len(K1.replace('\n', ''))} characters")
 print(f"K2 has {len(K2.replace('\n', ''))} characters")
 print(f"K3 has {len(K3.replace('\n', ''))} characters")
@@ -92,11 +89,13 @@ print("K2 Decrypted:")
 print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
 print()
 
-
 # we can decrypt K3 with wrap decypher using 192 as the key
 print("K3 Decrypted:")
-print(wrap_decypher(K3, 192))
+print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
 print()
 
 print("K4 Decrypted...???:")
-print("unknown")
+# print(vigenere_decipher(K4, "KRYPTOS", ""))
+# print(wrap_decypher(K4, 96))
+for i in range(1, 100):
+    print(wrap_decypher(K4, i))
