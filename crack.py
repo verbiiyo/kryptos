@@ -102,11 +102,30 @@ k4_no_spaces = k4_unsolved.replace(" ", "").replace("\n", "")
 # plot_characters_in_cirlce(k4_no_spaces, clockwise=True)
 
 
-categories = [list() for _ in range(12)]
 
-for i, char in enumerate(k4_no_spaces):
-    category = i % 12
-    categories[category] += char
-    print(category, char)
+def clock_forward(text: str, depth: int = 1):
+    for _ in range(depth):
 
-print(categories)
+        categories = [list() for _ in range(12)]
+
+        for i, char in enumerate(text):
+            category = i % 12
+            categories[category] += char
+        
+        # join categories into strings then one big string
+        text = "".join(["".join(category) for category in categories])
+
+    return text
+
+
+for d in range(1024):
+
+    new_text = clock_forward(k4_no_spaces, depth=d)
+    # check if it has "CLOCK", "EAST", "NORTH", or "BERLIN" in the string, if so print it
+
+    words = ["CLOCK", "EAST", "NORTH", "BERLIN"]
+
+    if any(word in new_text for word in words):
+        print(f"Depth: {d}")
+        print(new_text)
+        print("\n\n")
