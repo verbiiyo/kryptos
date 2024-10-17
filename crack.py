@@ -105,8 +105,14 @@ print("K4 Decrypted...???:")
 # print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
 # print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
 # print(multi_wrap_decipher(K4, [2, 4, 11, 2, 1, 1, 3]))  # berlin with degrees as hours?
-# print(vigenere_decipher(K4, "KRYPTOS", "GWMP"))
+# print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
+# print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
+# print(vigenere_decipher(K4, "KRYPTOS", "CLOCK"))
 # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
+
+
+for i in [1, 4, 4, 11, 4]:
+    print(wrap_decypher(K4, i))
 
 # BRO... doing this results in a matrix-like output that has some very interesting patterns
 # like the boundary of repeating "O"s on the end and bottom of the matrix
@@ -124,14 +130,14 @@ print("K4 Decrypted...???:")
 #         exit()
 
 
-for i in range(1, 100):
-    # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
-    # if "EAST" in txt:
-        # print(txt)
+# for i in range(1, 100):
+#     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+#     # if "EAST" in txt:
+#         # print(txt)
 
-    txt = multi_wrap_decipher(K4, [(x % i) for x in [1, 4, 4, 11, 4]])
-    print(txt)
+#     txt = multi_wrap_decipher(K4, [(x % i) for x in [1, 4, 4, 11, 4]])
+#     print(txt)
 
-    if "EAST" in txt:
-        print("FOUND!")
-        exit()
+#     if "EAST" in txt:
+#         print("FOUND!")
+#         exit()
