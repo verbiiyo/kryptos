@@ -69,19 +69,20 @@ print(f"K3 has {len(K3.replace('\n', ''))} characters")
 print(f"K4 has {len(K4.replace('\n', ''))} characters")
 print()
 
-print("K2 decrypted:")
-print(K2)
+print("K1 Decrypted:")
+print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST"))
+
+print("K2 Decrypted:")
 print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
 
 
 # we can decrypt K3 with wrap decypher using 192 as the key
-print("K3 decrypted:")
+print("K3 Decrypted:")
 print(wrap_decypher(K3, 192))
-# print(f"K3 has {len(K3.replace('\n', ''))} characters")
 
-print("-----")
+# print("-----")
 
-print(K4)
-print(len(K4.replace("\n", "")))
+# print(K4)
+# print(len(K4.replace("\n", "")))
 
 # print(wrap_decypher(K1, 192))
