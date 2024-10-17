@@ -129,7 +129,7 @@ for i in range(1, 100):
     # if "EAST" in txt:
         # print(txt)
 
-    txt = multi_wrap_decipher(K4, [(x * i) for x in [1, 4, 4, 11, 4]])
+    txt = multi_wrap_decipher(K4, [(x % i) for x in [1, 4, 4, 11, 4]])
     print(txt)
 
     if "EAST" in txt:
