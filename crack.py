@@ -8,9 +8,27 @@
 from messages import KRYPTOS, K1, K2, K3, K4
 
 
+# create a decorator that we can use to wrap all of these functions to flag any solutions that we find
+# with certain keywords
+
+KEYWORDS = ["CLOCK", "BERLIN", "EAST", "NORTH"]
+
+def flag_solution(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+
+        if any(keyword in result for keyword in KEYWORDS):
+            print("FOUND!", result)
+            exit()
+
+        return result
+    return wrapper
+
+
 # apparently K3 can be decrypted with 192 characters
 
 # let's gather the 192nd character from K3 for the full sequence
+@flag_solution
 def wrap_decypher(text: str, wrap_key: int):
     cypher_text = text.replace(" ", "").replace("\n", "")
 
@@ -25,6 +43,7 @@ def wrap_decypher(text: str, wrap_key: int):
     return out_str
 
 
+@flag_solution
 def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
     # first key is used to construct the Vigenère table
     # Vigenère table is where you take key1 and pull it all to the beginning
@@ -75,6 +94,7 @@ def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
     return out_str
 
 
+@flag_solution
 def multi_wrap_decipher(text: str, wraps: list):
     # wrap the text multiple times
     for wrap in wraps:
@@ -88,18 +108,18 @@ print(f"K3 has {len(K3.replace('\n', ''))} characters")
 print(f"K4 has {len(K4.replace('\n', ''))} characters")
 print()
 
-print("K1 Decrypted:")
-print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST"))
-print()
+# print("K1 Decrypted:")
+# print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST"))
+# print()
 
-print("K2 Decrypted:")
-print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
-print()
+# print("K2 Decrypted:")
+# print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
+# print()
 
-# we can decrypt K3 with wrap decypher using 192 as the key
-print("K3 Decrypted:")
-print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
-print()
+# # we can decrypt K3 with wrap decypher using 192 as the key
+# print("K3 Decrypted:")
+# print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
+# print()
 
 print("K4 Decrypted...???:")
 # print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
@@ -114,7 +134,12 @@ print("K4 Decrypted...???:")
 # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
 
 # print(multi_wrap_decipher(K4, [8, 31]))
-print(multi_wrap_decipher(K4, [31, 8]))
+# print(multi_wrap_decipher(K4, [31, 8]))
+
+
+# lets try setting the wrap decipher key to the ascii values of the characters in "KRYPTOS"
+print(multi_wrap_decipher(K4, [ord(char) for char in "KRYPTOS"]))
+
 
 # japanese stuff
 # print(vigenere_decipher(K4, "KRYPTOS", "TOZAI"))
