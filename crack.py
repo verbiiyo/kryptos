@@ -102,6 +102,12 @@ def multi_wrap_decipher(text: str, wraps: list):
         text = wrap_decypher(text, wrap)
     return text
 
+
+K1_SOLVED = vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True)
+K2_SOLVED = vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True)
+K3_SOLVED = wrap_decypher(K3, 192, disable_flag=True)  # where the flip does 192 come from?
+
+
 if __name__ == "__main__":
 
     print(f"K1 has {len(K1.replace('\n', ''))} characters")
@@ -111,19 +117,18 @@ if __name__ == "__main__":
     print()
 
     print("K1 Decrypted:")
-    print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True))
+    print(K1_SOLVED)
     print()
 
     print("K2 Decrypted:")
-    print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True))
+    print(K2_SOLVED)
     print()
 
     # we can decrypt K3 with wrap decypher using 192 as the key
     print("K3 Decrypted:")
-    print(wrap_decypher(K3, 192, disable_flag=True))  # where the flip does 192 come from?
-    print()
+    print(K3_SOLVED)
 
-    print("K4 Decrypted...???:")
+    # print("K4 Decrypted...???:")
     # print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
     # print(multi_wrap_decipher(K4, [1, 2, 11, 1]))  # clock screen shot time (10:31)
     # print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
@@ -140,7 +145,7 @@ if __name__ == "__main__":
 
 
     # lets try setting the wrap decipher key to the ascii values of the characters in "KRYPTOS"
-    print(multi_wrap_decipher(K4, [ord(char) for char in "KRYPTOS"]))
+    # print(multi_wrap_decipher(K4, [ord(char) for char in "KRYPTOS"]))
 
 
     # japanese stuff
