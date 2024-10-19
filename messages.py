@@ -1,3 +1,7 @@
+def flat_format(string: str) -> str:
+    return string.replace("\n", "").replace(" ", "")
+
+
 KRYPTOS = """
 EMUFPHZLRFAXYUSDJKZLDKRNSHGNFIVJ
 YQTQUXQBQVYUVLLTREVJYQTMKYRDMFD
@@ -78,17 +82,17 @@ def break_k3_into_14x24(text: str):
 # (excludes the ?)
 K3_14_24 = break_k3_into_14x24(K3)
 
-K4 = """
+K4 = flat_format("""
 OBKR
 UOXOGHULBSOLIFBBWFLRVQQPRNGKSSO
 TWTQSJQSSEKZZWATJKLUDIAWINFBNYP
 VTTMZFPKWGDKZXTJCDIGKUHUAUEKCAR
-"""
+""")
 
 
-K4_WITH_HINTS = """
-                          ?OBKR
+K4_WITH_HINTS = flat_format("""
+                          OBKR
 UOXOGHULBSOLIFBBWEASTNORTHEASTO
 TWTQSJQSSEKZZWATJKLUDIAWINFBBER
 LINCLOCKWGDKZXTJCDIGKUHUAUEKCAR
-"""
+""")
