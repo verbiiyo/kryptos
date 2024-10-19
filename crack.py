@@ -7,6 +7,8 @@
 
 from messages import KRYPTOS, K1, K2, K3, K4
 
+from colorama import Fore, Style
+
 
 # create a decorator that we can use to wrap all of these functions to flag any solutions that we find
 # with certain keywords
@@ -18,8 +20,24 @@ def flag_solution(func):
         result = func(*args, **kwargs)
 
         if not disable_flag:
-            if any(keyword in result for keyword in KEYWORDS):
-                print("FOUND!", result)
+            found_keywords = []
+
+            for keyword in KEYWORDS:
+                if keyword not in result:
+                    continue
+
+                found_keywords.append(keyword)
+
+            if len(found_keywords) > 0:
+                print(f"It contained these keywords: {Fore.RED}{', '.join(found_keywords)}{Style.RESET_ALL}")
+
+                display_result = result
+
+                # highlight all of the key words in the result
+                for keyword in found_keywords:
+                    display_result = display_result.replace(keyword, f"{Fore.RED}{keyword}{Style.RESET_ALL}")
+
+                print(display_result)
                 exit()
 
         return result

@@ -70,7 +70,10 @@ if __name__ == "__main__":
     assert cost(K4) == 0.0
     assert cost(K4_WITH_HINTS) == 1.3814432989690721
 
-    print(cost(K4_WITH_HINTS))
+    # print(cost(K4_WITH_HINTS))
+
+    for i in range(100):
+        print(modular_distance(K3, wrap_decipher(K3, i)))
 
     # WORDS = ["WEST", "SOUTH", "WESTERN", "PARIS", "TOWER", "NORTHWEST", "MOSCOW", "COMPASS", "TIMELINE", "WATCH"]
     # for word in WORDS:
