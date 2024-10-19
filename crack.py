@@ -102,85 +102,86 @@ def multi_wrap_decipher(text: str, wraps: list):
         text = wrap_decypher(text, wrap)
     return text
 
+if __name__ == "__main__":
 
-print(f"K1 has {len(K1.replace('\n', ''))} characters")
-print(f"K2 has {len(K2.replace('\n', ''))} characters")
-print(f"K3 has {len(K3.replace('\n', ''))} characters")
-print(f"K4 has {len(K4.replace('\n', ''))} characters")
-print()
+    print(f"K1 has {len(K1.replace('\n', ''))} characters")
+    print(f"K2 has {len(K2.replace('\n', ''))} characters")
+    print(f"K3 has {len(K3.replace('\n', ''))} characters")
+    print(f"K4 has {len(K4.replace('\n', ''))} characters")
+    print()
 
-print("K1 Decrypted:")
-print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True))
-print()
+    print("K1 Decrypted:")
+    print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True))
+    print()
 
-print("K2 Decrypted:")
-print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True))
-print()
+    print("K2 Decrypted:")
+    print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True))
+    print()
 
-# we can decrypt K3 with wrap decypher using 192 as the key
-print("K3 Decrypted:")
-print(wrap_decypher(K3, 192, disable_flag=True))  # where the flip does 192 come from?
-print()
+    # we can decrypt K3 with wrap decypher using 192 as the key
+    print("K3 Decrypted:")
+    print(wrap_decypher(K3, 192, disable_flag=True))  # where the flip does 192 come from?
+    print()
 
-print("K4 Decrypted...???:")
-# print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
-# print(multi_wrap_decipher(K4, [1, 2, 11, 1]))  # clock screen shot time (10:31)
-# print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
-# print(multi_wrap_decipher(K4, [2, 4, 11, 2, 1, 1, 3]))  # berlin with degrees as hours?
-# print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
-# print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
-# print(vigenere_decipher(K4, "KRYPTOS", "CLOCK"))
-# print(vigenere_decipher(K4, "KRYPTOS", "MENGENLEHREUHR"))  # clock name
-# print(vigenere_decipher(K4, "KRYPTOS", "BERLINUHR"))  # clock name
-# print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
+    print("K4 Decrypted...???:")
+    # print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
+    # print(multi_wrap_decipher(K4, [1, 2, 11, 1]))  # clock screen shot time (10:31)
+    # print(multi_wrap_decipher(K4, [11, 2, 1, 3]))  # berlin clock minutes filled?
+    # print(multi_wrap_decipher(K4, [2, 4, 11, 2, 1, 1, 3]))  # berlin with degrees as hours?
+    # print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
+    # print(multi_wrap_decipher(K4, [17, 6, 1975]))  # berlin clock date created?
+    # print(vigenere_decipher(K4, "KRYPTOS", "CLOCK"))
+    # print(vigenere_decipher(K4, "KRYPTOS", "MENGENLEHREUHR"))  # clock name
+    # print(vigenere_decipher(K4, "KRYPTOS", "BERLINUHR"))  # clock name
+    # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
 
-# print(multi_wrap_decipher(K4, [8, 31]))
-# print(multi_wrap_decipher(K4, [31, 8]))
-
-
-# lets try setting the wrap decipher key to the ascii values of the characters in "KRYPTOS"
-print(multi_wrap_decipher(K4, [ord(char) for char in "KRYPTOS"]))
+    # print(multi_wrap_decipher(K4, [8, 31]))
+    # print(multi_wrap_decipher(K4, [31, 8]))
 
 
-# japanese stuff
-# print(vigenere_decipher(K4, "KRYPTOS", "TOZAI"))
-# print(vigenere_decipher(K4, "KRYPTOS", "KITA"))
-# print(vigenere_decipher(K4, "KRYPTOS", "HIGASHI"))
-# print(vigenere_decipher(K4, "KRYPTOS", "TOKYO" ))
-
-# print(wrap_decypher(K4, -336))  # berlin square counts
+    # lets try setting the wrap decipher key to the ascii values of the characters in "KRYPTOS"
+    print(multi_wrap_decipher(K4, [ord(char) for char in "KRYPTOS"]))
 
 
-# for i in reversed([1, 4, 4, 11, 4]):
-# for i in reversed([4, 4, 4, 4, 4, 4]):
-    # print(wrap_decypher(K4, i))
+    # japanese stuff
+    # print(vigenere_decipher(K4, "KRYPTOS", "TOZAI"))
+    # print(vigenere_decipher(K4, "KRYPTOS", "KITA"))
+    # print(vigenere_decipher(K4, "KRYPTOS", "HIGASHI"))
+    # print(vigenere_decipher(K4, "KRYPTOS", "TOKYO" ))
 
-# BRO... doing this results in a matrix-like output that has some very interesting patterns
-# like the boundary of repeating "O"s on the end and bottom of the matrix
-# and the repeating as you go further in the i dimension.
-# for i in range(1, 120):
-#     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
-#     # if "EAST" in txt:
-#         # print(txt)
-
-#     nums = list(range(1, i))
-
-#     txt = multi_wrap_decipher(K4, [x ** 2 for x in nums])
-#     print(txt)
-
-#     if "EAST" in txt:
-#         print("FOUND!")
-#         exit()
+    # print(wrap_decypher(K4, -336))  # berlin square counts
 
 
-# for i in range(1, 100):
-#     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
-#     # if "EAST" in txt:
-#         # print(txt)
+    # for i in reversed([1, 4, 4, 11, 4]):
+    # for i in reversed([4, 4, 4, 4, 4, 4]):
+        # print(wrap_decypher(K4, i))
 
-#     txt = multi_wrap_decipher(K4, [(x % i) for x in [1, 4, 4, 11, 4]])
-#     print(txt)
+    # BRO... doing this results in a matrix-like output that has some very interesting patterns
+    # like the boundary of repeating "O"s on the end and bottom of the matrix
+    # and the repeating as you go further in the i dimension.
+    # for i in range(1, 120):
+    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+    #     # if "EAST" in txt:
+    #         # print(txt)
 
-#     if "EAST" in txt:
-#         print("FOUND!")
-#         exit()
+    #     nums = list(range(1, i))
+
+    #     txt = multi_wrap_decipher(K4, [x ** 2 for x in nums])
+    #     print(txt)
+
+    #     if "EAST" in txt:
+    #         print("FOUND!")
+    #         exit()
+
+
+    # for i in range(1, 100):
+    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+    #     # if "EAST" in txt:
+    #         # print(txt)
+
+    #     txt = multi_wrap_decipher(K4, [(x % i) for x in [1, 4, 4, 11, 4]])
+    #     print(txt)
+
+    #     if "EAST" in txt:
+    #         print("FOUND!")
+    #         exit()
