@@ -30,13 +30,13 @@ def flag_solution(func):
 
 # let's gather the 192nd character from K3 for the full sequence
 @flag_solution
-def wrap_decypher(text: str, wrap_key: int):
-    cypher_text = text.replace(" ", "").replace("\n", "")
+def wrap_decipher(text: str, wrap_key: int):
+    cipher_text = text.replace(" ", "").replace("\n", "")
 
     out_str = ""
-    for i in range(len(cypher_text)):
+    for i in range(len(cipher_text)):
         char_index = wrap_key * (i + 1)
-        out_str += cypher_text[char_index % len(cypher_text)]
+        out_str += cipher_text[char_index % len(cipher_text)]
 
     # re-organize out_str to match K3's newline format
     # out_str = "\n".join([out_str[i:i+31] for i in range(0, len(out_str), 31)])
@@ -99,13 +99,13 @@ def vigenere_decipher(cipher_text: str, alphabet_key: str, main_key: str):
 def multi_wrap_decipher(text: str, wraps: list):
     # wrap the text multiple times
     for wrap in wraps:
-        text = wrap_decypher(text, wrap)
+        text = wrap_decipher(text, wrap)
     return text
 
 
 K1_SOLVED = vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True)
 K2_SOLVED = vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True)
-K3_SOLVED = wrap_decypher(K3, 192, disable_flag=True)  # where the flip does 192 come from?
+K3_SOLVED = wrap_decipher(K3, 192, disable_flag=True)  # where the flip does 192 come from?
 
 
 if __name__ == "__main__":
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     print(K2_SOLVED)
     print()
 
-    # we can decrypt K3 with wrap decypher using 192 as the key
+    # we can decrypt K3 with wrap decipher using 192 as the key
     print("K3 Decrypted:")
     print(K3_SOLVED)
 
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     # print(vigenere_decipher(K4, "KRYPTOS", "CLOCK"))
     # print(vigenere_decipher(K4, "KRYPTOS", "MENGENLEHREUHR"))  # clock name
     # print(vigenere_decipher(K4, "KRYPTOS", "BERLINUHR"))  # clock name
-    # print(vigenere_decipher(wrap_decypher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
+    # print(vigenere_decipher(wrap_decipher(K4, 192), "KRYPTOS", "GWMP"))#, "KRYPTOS", "PALIMPSEST"))
 
     # print(multi_wrap_decipher(K4, [8, 31]))
     # print(multi_wrap_decipher(K4, [31, 8]))
@@ -154,18 +154,18 @@ if __name__ == "__main__":
     # print(vigenere_decipher(K4, "KRYPTOS", "HIGASHI"))
     # print(vigenere_decipher(K4, "KRYPTOS", "TOKYO" ))
 
-    # print(wrap_decypher(K4, -336))  # berlin square counts
+    # print(wrap_decipher(K4, -336))  # berlin square counts
 
 
     # for i in reversed([1, 4, 4, 11, 4]):
     # for i in reversed([4, 4, 4, 4, 4, 4]):
-        # print(wrap_decypher(K4, i))
+        # print(wrap_decipher(K4, i))
 
     # BRO... doing this results in a matrix-like output that has some very interesting patterns
     # like the boundary of repeating "O"s on the end and bottom of the matrix
     # and the repeating as you go further in the i dimension.
     # for i in range(1, 120):
-    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decipher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
     #     # if "EAST" in txt:
     #         # print(txt)
 
@@ -180,7 +180,7 @@ if __name__ == "__main__":
 
 
     # for i in range(1, 100):
-    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decypher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
+    #     # txt = vigenere_decipher(vigenere_decipher(wrap_decipher(K4, i), "KRYPTOS", "ABSCISSA"), "KRYPTOS", "PALIMPSEST")
     #     # if "EAST" in txt:
     #         # print(txt)
 
