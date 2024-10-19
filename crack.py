@@ -14,12 +14,13 @@ from messages import KRYPTOS, K1, K2, K3, K4
 KEYWORDS = ["CLOCK", "BERLIN", "EAST", "NORTH"]
 
 def flag_solution(func):
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, disable_flag: bool = False, **kwargs):
         result = func(*args, **kwargs)
 
-        if any(keyword in result for keyword in KEYWORDS):
-            print("FOUND!", result)
-            exit()
+        if not disable_flag:
+            if any(keyword in result for keyword in KEYWORDS):
+                print("FOUND!", result)
+                exit()
 
         return result
     return wrapper
@@ -108,18 +109,18 @@ print(f"K3 has {len(K3.replace('\n', ''))} characters")
 print(f"K4 has {len(K4.replace('\n', ''))} characters")
 print()
 
-# print("K1 Decrypted:")
-# print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST"))
-# print()
+print("K1 Decrypted:")
+print(vigenere_decipher(K1, "KRYPTOS", "PALIMPSEST", disable_flag=True))
+print()
 
-# print("K2 Decrypted:")
-# print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA"))
-# print()
+print("K2 Decrypted:")
+print(vigenere_decipher(K2, "KRYPTOS", "ABSCISSA", disable_flag=True))
+print()
 
-# # we can decrypt K3 with wrap decypher using 192 as the key
-# print("K3 Decrypted:")
-# print(wrap_decypher(K3, 192))  # where the flip does 192 come from?
-# print()
+# we can decrypt K3 with wrap decypher using 192 as the key
+print("K3 Decrypted:")
+print(wrap_decypher(K3, 192, disable_flag=True))  # where the flip does 192 come from?
+print()
 
 print("K4 Decrypted...???:")
 # print(multi_wrap_decipher(K4, [1, 4, 4, 11, 4]))  # berlin square counts
