@@ -47,13 +47,16 @@ def modular_distance(a: str, b: str) -> float:
 
     # get n which is max value out of all a and b value arrays
     n = max(np.max(a_values), np.max(b_values)) + 1
-    print(n)
 
     mod_dist = np.abs(a_values - b_values)
     mod_dist = np.minimum(mod_dist, n - mod_dist)
     mod_dist = mod_dist.astype(float)
 
     return np.mean(mod_dist)
+
+
+def cost(decipher_attempt_text: str) -> float:
+    return modular_distance(K4, decipher_attempt_text)
 
 
 
@@ -64,10 +67,10 @@ if __name__ == "__main__":
     print(f"K4 Chars:\t{"  ".join(no_hint_chars)}")
     print(f"Hint Chars:\t{"  ".join(hint_chars)}")
 
-    assert modular_distance(K4, K4) == 0.0
-    assert modular_distance(K4, K4_WITH_HINTS) == 1.3814432989690721
+    assert cost(K4) == 0.0
+    assert cost(K4_WITH_HINTS) == 1.3814432989690721
 
-    print(modular_distance(K4, K4_WITH_HINTS))
+    print(cost(K4_WITH_HINTS))
 
     # WORDS = ["WEST", "SOUTH", "WESTERN", "PARIS", "TOWER", "NORTHWEST", "MOSCOW", "COMPASS", "TIMELINE", "WATCH"]
     # for word in WORDS:
