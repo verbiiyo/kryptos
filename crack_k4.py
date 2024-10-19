@@ -2,6 +2,7 @@ from typing import List, Tuple
 
 from crack import vigenere_decipher, wrap_decipher, multi_wrap_decipher, K1_SOLVED, K2_SOLVED, K3_SOLVED
 from messages import KRYPTOS, K1, K2, K3, K4, K4_WITH_HINTS
+import numpy as np
 
 
 def get_hint_chars() -> Tuple[List[int], List[str], List[str]]:
@@ -32,14 +33,48 @@ def try_all_possible_berlin_clock_combinations():
                     multi_wrap_decipher(K4, [i, j, k, l])
 
 
+
+def modular_distance(a: str, b: str) -> float:
+    a_values = np.array([ord(c) for c in a])
+    b_values = np.array([ord(c) for c in b])
+
+    # get min_n which is the min value out of all a and b value arrays
+    min_n = min(np.min(a_values), np.min(b_values))
+
+    # convert a and b to start at 0
+    a_values -= min_n
+    b_values -= min_n
+
+    # get n which is max value out of all a and b value arrays
+    n = max(np.max(a_values), np.max(b_values)) + 1
+    print(n)
+
+    mod_dist = np.abs(a_values - b_values)
+    mod_dist = np.minimum(mod_dist, n - mod_dist)
+    mod_dist = mod_dist.astype(float)
+
+    return np.mean(mod_dist)
+
+
+
+
 if __name__ == "__main__":
     hint_indices, no_hint_chars, hint_chars = get_hint_chars()
     print(f"Indices:\t{" ".join([str(i) for i in hint_indices])}")
     print(f"K4 Chars:\t{"  ".join(no_hint_chars)}")
     print(f"Hint Chars:\t{"  ".join(hint_chars)}")
 
-    try_all_possible_berlin_clock_combinations()
+    assert modular_distance(K4, K4) == 0.0
+    assert modular_distance(K4, K4_WITH_HINTS) == 1.3814432989690721
 
+    print(modular_distance(K4, K4_WITH_HINTS))
+
+    # WORDS = ["WEST", "SOUTH", "WESTERN", "PARIS", "TOWER", "NORTHWEST", "MOSCOW", "COMPASS", "TIMELINE", "WATCH"]
+    # for word in WORDS:
+    #     print(vigenere_decipher(K4, "KRYPTOS", word))
+
+
+    # try_all_possible_berlin_clock_combinations()
     # for i in range(100):
     #     for j in range(100):
     #         for k in range(100):
